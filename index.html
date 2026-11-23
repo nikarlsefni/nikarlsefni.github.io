@@ -1,0 +1,828 @@
+```
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Nicole | Meu Cantinho</title>
+
+    <link href="https://fonts.googleapis.com/css2?family=Quicksand:wght@400;500;600;700&family=Playfair+Display:wght@600;700&display=swap" rel="stylesheet">
+
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            font-family: 'Quicksand', sans-serif;
+            background: #faf7ff;
+            color: #5c4b70;
+            overflow-x: hidden;
+        }
+
+        :root {
+            --lilas: #c8a9e8;
+            --lilas-claro: #eee3fa;
+            --roxo: #8765aa;
+            --rosa: #f4dce9;
+            --texto: #5c4b70;
+            --branco: #fff;
+        }
+
+        /* Fundo */
+
+        .background-decoration {
+            position: fixed;
+            inset: 0;
+            pointer-events: none;
+            z-index: -1;
+            overflow: hidden;
+        }
+
+        .blob {
+            position: absolute;
+            border-radius: 50%;
+            filter: blur(2px);
+            opacity: .45;
+            animation: float 9s ease-in-out infinite;
+        }
+
+        .blob:nth-child(1) {
+            width: 300px;
+            height: 300px;
+            background: #e7d5fa;
+            top: -100px;
+            left: -100px;
+        }
+
+        .blob:nth-child(2) {
+            width: 250px;
+            height: 250px;
+            background: #f7dce9;
+            right: -80px;
+            top: 40%;
+            animation-delay: 2s;
+        }
+
+        .blob:nth-child(3) {
+            width: 200px;
+            height: 200px;
+            background: #dcd0fa;
+            bottom: -80px;
+            left: 30%;
+            animation-delay: 4s;
+        }
+
+        @keyframes float {
+            0%, 100% { transform: translateY(0) rotate(0); }
+            50% { transform: translateY(-30px) rotate(10deg); }
+        }
+
+        /* Navegação */
+
+        header {
+            width: 100%;
+            padding: 22px 8%;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            position: absolute;
+            top: 0;
+            z-index: 10;
+        }
+
+        .logo {
+            font-family: 'Playfair Display', serif;
+            font-size: 25px;
+            color: var(--roxo);
+            font-weight: bold;
+        }
+
+        nav {
+            display: flex;
+            gap: 30px;
+        }
+
+        nav a {
+            text-decoration: none;
+            color: var(--texto);
+            font-weight: 600;
+            font-size: 14px;
+            transition: .3s;
+        }
+
+        nav a:hover {
+            color: #b58bdc;
+            transform: translateY(-3px);
+        }
+
+        /* Apresentação */
+
+        .hero {
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 120px 10% 80px;
+            gap: 80px;
+        }
+
+        .hero-content {
+            max-width: 550px;
+            animation: appear 1s ease forwards;
+        }
+
+        .welcome {
+            display: inline-block;
+            background: #eee3fa;
+            color: #8969a9;
+            padding: 10px 18px;
+            border-radius: 30px;
+            font-size: 13px;
+            font-weight: 700;
+            margin-bottom: 25px;
+        }
+
+        h1 {
+            font-family: 'Playfair Display', serif;
+            font-size: clamp(45px, 7vw, 75px);
+            color: #80609e;
+            line-height: 1.1;
+            margin-bottom: 20px;
+        }
+
+        h1 span {
+            color: #c49cda;
+        }
+
+        .hero-content p {
+            font-size: 16px;
+            line-height: 1.9;
+            color: #786b85;
+            margin-bottom: 30px;
+        }
+
+        .hero-button {
+            display: inline-block;
+            background: #b99ad8;
+            color: white;
+            padding: 14px 27px;
+            border-radius: 30px;
+            text-decoration: none;
+            font-weight: 700;
+            box-shadow: 0 7px 20px #c9b1df66;
+            transition: .3s;
+        }
+
+        .hero-button:hover {
+            transform: translateY(-5px);
+            background: #a783ca;
+            box-shadow: 0 10px 25px #b99ad866;
+        }
+
+        .cat-container {
+            position: relative;
+            width: 330px;
+            height: 330px;
+            flex-shrink: 0;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: linear-gradient(145deg, #f0e4fc, #f9eaf3);
+            border-radius: 48% 52% 60% 40% / 45% 45% 55% 55%;
+            box-shadow: 0 20px 50px #bba3d533;
+            animation: catFloat 5s ease-in-out infinite;
+        }
+
+        .cat {
+            font-size: 145px;
+            filter: drop-shadow(0 10px 8px #a78cba33);
+            animation: catWiggle 4s ease-in-out infinite;
+        }
+
+        .sparkle {
+            position: absolute;
+            color: #b58bdc;
+            font-size: 28px;
+            animation: sparkle 2s ease-in-out infinite;
+        }
+
+        .sparkle.one {
+            top: 30px;
+            right: 35px;
+        }
+
+        .sparkle.two {
+            bottom: 45px;
+            left: 30px;
+            animation-delay: 1s;
+        }
+
+        @keyframes catFloat {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-15px); }
+        }
+
+        @keyframes catWiggle {
+            0%, 90%, 100% { transform: rotate(0); }
+            93% { transform: rotate(-8deg); }
+            96% { transform: rotate(8deg); }
+        }
+
+        @keyframes sparkle {
+            0%, 100% { opacity: .4; transform: scale(.8) rotate(0); }
+            50% { opacity: 1; transform: scale(1.2) rotate(20deg); }
+        }
+
+        @keyframes appear {
+            from { opacity: 0; transform: translateY(30px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        /* Seções */
+
+        section {
+            padding: 90px 10%;
+        }
+
+        .section-title {
+            text-align: center;
+            margin-bottom: 55px;
+        }
+
+        .section-title h2 {
+            font-family: 'Playfair Display', serif;
+            font-size: 40px;
+            color: #8765aa;
+            margin-bottom: 12px;
+        }
+
+        .section-title p {
+            color: #9687a2;
+            font-size: 14px;
+        }
+
+        /* Sobre mim */
+
+        .about {
+            background: #f2eafa;
+        }
+
+        .about-content {
+            max-width: 850px;
+            margin: auto;
+            background: #ffffffb8;
+            border: 1px solid #ffffff;
+            padding: 45px;
+            border-radius: 25px;
+            text-align: center;
+            box-shadow: 0 12px 35px #aa8dc51a;
+            transition: .4s;
+        }
+
+        .about-content:hover {
+            transform: translateY(-7px);
+            box-shadow: 0 18px 40px #aa8dc533;
+        }
+
+        .about-content p {
+            font-size: 16px;
+            line-height: 2;
+            color: #776983;
+        }
+
+        .about-content strong {
+            color: #a17bc2;
+        }
+
+        /* Interesses */
+
+        .interests-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 25px;
+        }
+
+        .interest-card {
+            background: white;
+            padding: 35px 25px;
+            border-radius: 22px;
+            text-align: center;
+            border: 1px solid #f0e6f8;
+            box-shadow: 0 8px 25px #a78cba12;
+            transition: .4s;
+        }
+
+        .interest-card:hover {
+            transform: translateY(-10px) rotate(-1deg);
+            box-shadow: 0 15px 35px #a78cba2b;
+            background: #fdfaff;
+        }
+
+        .interest-icon {
+            width: 65px;
+            height: 65px;
+            background: #f1e7fa;
+            border-radius: 20px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto 20px;
+            font-size: 30px;
+        }
+
+        .interest-card h3 {
+            color: #8969a9;
+            font-size: 19px;
+            margin-bottom: 12px;
+        }
+
+        .interest-card p {
+            color: #92849c;
+            font-size: 13px;
+            line-height: 1.8;
+        }
+
+        /* Aprendizado */
+
+        .learning {
+            background: #f5effb;
+        }
+
+        .learning-container {
+            max-width: 850px;
+            margin: auto;
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 20px;
+        }
+
+        .learning-card {
+            padding: 28px;
+            background: white;
+            border-radius: 20px;
+            border-left: 5px solid #c4a3e1;
+            box-shadow: 0 7px 20px #a78cba13;
+            transition: .3s;
+        }
+
+        .learning-card:hover {
+            transform: translateX(6px);
+        }
+
+        .learning-card h3 {
+            color: #8969a9;
+            margin-bottom: 10px;
+            font-size: 18px;
+        }
+
+        .learning-card p {
+            color: #92849c;
+            font-size: 13px;
+            line-height: 1.7;
+        }
+
+        .status {
+            display: inline-block;
+            margin-top: 15px;
+            padding: 6px 12px;
+            border-radius: 20px;
+            font-size: 11px;
+            font-weight: 700;
+            background: #eee3fa;
+            color: #8969a9;
+        }
+
+        .status.future {
+            background: #f9e9f1;
+            color: #b77d9c;
+        }
+
+        /* Curso */
+
+        .course-box {
+            max-width: 800px;
+            margin: auto;
+            background: linear-gradient(130deg, #b99bd8, #d4b6e7);
+            padding: 45px;
+            border-radius: 25px;
+            text-align: center;
+            color: white;
+            box-shadow: 0 15px 35px #b99bd844;
+            transition: .4s;
+        }
+
+        .course-box:hover {
+            transform: scale(1.02);
+        }
+
+        .course-box h3 {
+            font-family: 'Playfair Display', serif;
+            font-size: 30px;
+            margin-bottom: 18px;
+        }
+
+        .course-box p {
+            line-height: 1.9;
+            font-size: 15px;
+            opacity: .95;
+        }
+
+        /* Rodapé */
+
+        footer {
+            background: #80609e;
+            color: white;
+            padding: 45px 20px;
+            text-align: center;
+        }
+
+        footer h3 {
+            font-family: 'Playfair Display', serif;
+            font-size: 26px;
+            margin-bottom: 12px;
+        }
+
+        footer p {
+            font-size: 13px;
+            opacity: .8;
+            line-height: 2;
+        }
+
+        .footer-line {
+            width: 50px;
+            height: 3px;
+            background: #e6d2f6;
+            border-radius: 5px;
+            margin: 20px auto;
+        }
+
+        /* Animação ao rolar */
+
+        .reveal {
+            opacity: 0;
+            transform: translateY(35px);
+            transition: opacity .8s ease, transform .8s ease;
+        }
+
+        .reveal.active {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        /* Responsividade */
+
+        @media (max-width: 850px) {
+            .hero {
+                flex-direction: column-reverse;
+                text-align: center;
+                gap: 45px;
+                padding-top: 130px;
+            }
+
+            .cat-container {
+                width: 250px;
+                height: 250px;
+            }
+
+            .cat {
+                font-size: 110px;
+            }
+
+            .interests-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+        }
+
+        @media (max-width: 600px) {
+            header {
+                padding: 20px 5%;
+                flex-direction: column;
+                gap: 15px;
+            }
+
+            nav {
+                gap: 17px;
+            }
+
+            nav a {
+                font-size: 12px;
+            }
+
+            .hero {
+                padding-left: 7%;
+                padding-right: 7%;
+            }
+
+            .interests-grid,
+            .learning-container {
+                grid-template-columns: 1fr;
+            }
+
+            section {
+                padding: 70px 7%;
+            }
+
+            .about-content {
+                padding: 28px 22px;
+            }
+
+            .course-box {
+                padding: 30px 22px;
+            }
+
+            .section-title h2 {
+                font-size: 32px;
+            }
+        }
+
+    </style>
+</head>
+
+<body>
+
+    <div class="background-decoration">
+        <div class="blob"></div>
+        <div class="blob"></div>
+        <div class="blob"></div>
+    </div>
+
+    <header>
+        <div class="logo">nicole.</div>
+
+        <nav>
+            <a href="#inicio">Início</a>
+            <a href="#sobre">Sobre mim</a>
+            <a href="#interesses">Interesses</a>
+            <a href="#aprendizado">Aprendizado</a>
+        </nav>
+    </header>
+
+    <main>
+
+        <section class="hero" id="inicio">
+
+            <div class="hero-content">
+                <span class="welcome">Bem-vindo ao meu cantinho!</span>
+
+                <h1>Oi, eu sou a <span>Nicole!</span></h1>
+
+                <p>
+                    Tenho 16 anos, sou uma garota cheia de curiosidades,
+                    ideias e vontade de aprender coisas novas.
+                    Este é meu pequeno espaço na internet, onde compartilho
+                    um pouquinho sobre quem sou, meus interesses e meus sonhos.
+                </p>
+
+                <a href="#sobre" class="hero-button">Conheça um pouquinho de mim</a>
+            </div>
+
+            <div class="cat-container">
+                <span class="sparkle one">✦</span>
+                <span class="cat">🐈</span>
+                <span class="sparkle two">✧</span>
+            </div>
+
+        </section>
+
+        <section class="about" id="sobre">
+
+            <div class="section-title reveal">
+                <h2>Sobre mim</h2>
+                <p>Um pouquinho da pessoa por trás da tela</p>
+            </div>
+
+            <div class="about-content reveal">
+                <p>
+                    Meu nome é <strong>Nicole</strong>, tenho <strong>16 anos</strong>
+                    e sou uma pessoa curiosa que gosta de explorar diferentes
+                    assuntos e descobrir novas possibilidades.
+                    Atualmente, estou cursando <strong>Comércio Exterior</strong>
+                    no ensino técnico, uma área que me permite conhecer melhor
+                    o mundo, as relações entre países e o funcionamento do
+                    comércio internacional.
+                    <br><br>
+                    Também estou começando minha jornada no mundo da programação.
+                    Atualmente, estou aprendendo <strong>Python</strong> e tenho
+                    muita vontade de aprender <strong>HTML e C++</strong>.
+                    Gosto da ideia de transformar ideias em projetos e descobrir
+                    tudo o que a tecnologia pode proporcionar.
+                    <br><br>
+                    Sou uma mistura de criatividade, curiosidade e vontade
+                    de aprender. Ainda tenho muito para descobrir e construir,
+                    e acho isso uma das partes mais interessantes da vida.
+                </p>
+            </div>
+
+        </section>
+
+        <section id="interesses">
+
+            <div class="section-title reveal">
+                <h2>Coisas que eu gosto</h2>
+                <p>Pequenos universos que fazem parte do meu mundo</p>
+            </div>
+
+            <div class="interests-grid">
+
+                <div class="interest-card reveal">
+                    <div class="interest-icon">🎮</div>
+                    <h3>Jogos</h3>
+                    <p>
+                        Adoro jogar, explorar universos diferentes,
+                        conhecer histórias e me divertir através dos games.
+                    </p>
+                </div>
+
+                <div class="interest-card reveal">
+                    <div class="interest-icon">🎨</div>
+                    <h3>Desenho</h3>
+                    <p>
+                        Gosto de desenhar e expressar minha criatividade.
+                        É uma forma de transformar ideias em algo visual.
+                    </p>
+                </div>
+
+                <div class="interest-card reveal">
+                    <div class="interest-icon">🌎</div>
+                    <h3>Geopolítica</h3>
+                    <p>
+                        Tenho bastante interesse em entender o mundo,
+                        as relações internacionais, os conflitos e a política global.
+                    </p>
+                </div>
+
+                <div class="interest-card reveal">
+                    <div class="interest-icon">💻</div>
+                    <h3>Programação</h3>
+                    <p>
+                        Estou descobrindo o universo da tecnologia,
+                        aprendendo a programar e criando novas possibilidades.
+                    </p>
+                </div>
+
+                <div class="interest-card reveal">
+                    <div class="interest-icon">📚</div>
+                    <h3>Aprendizado</h3>
+                    <p>
+                        Gosto de conhecer assuntos diferentes e aprender
+                        coisas que ampliem minha visão de mundo.
+                    </p>
+                </div>
+
+                <div class="interest-card reveal">
+                    <div class="interest-icon">🐈</div>
+                    <h3>Gatinhos</h3>
+                    <p>
+                        Um cantinho especial para fofura, tranquilidade
+                        e tudo que deixa os dias mais bonitos.
+                    </p>
+                </div>
+
+            </div>
+
+        </section>
+
+        <section class="learning" id="aprendizado">
+
+            <div class="section-title reveal">
+                <h2>Minha jornada na tecnologia</h2>
+                <p>Aprendendo um pouquinho a cada dia</p>
+            </div>
+
+            <div class="learning-container">
+
+                <div class="learning-card reveal">
+                    <h3>Python</h3>
+                    <p>
+                        Minha porta de entrada para a programação.
+                        Estou aprendendo lógica e descobrindo como desenvolver
+                        meus primeiros projetos.
+                    </p>
+                    <span class="status">Aprendendo atualmente</span>
+                </div>
+
+                <div class="learning-card reveal">
+                    <h3>HTML</h3>
+                    <p>
+                        Tenho muita vontade de aprender a desenvolver
+                        páginas e sites, criando experiências visuais
+                        através do código.
+                    </p>
+                    <span class="status future">Quero aprender</span>
+                </div>
+
+                <div class="learning-card reveal">
+                    <h3>C++</h3>
+                    <p>
+                        Também quero explorar essa linguagem,
+                        conhecer melhor programação e aprofundar
+                        meus conhecimentos em tecnologia.
+                    </p>
+                    <span class="status future">Quero aprender</span>
+                </div>
+
+                <div class="learning-card reveal">
+                    <h3>Novos projetos</h3>
+                    <p>
+                        Quero experimentar, errar, melhorar e criar
+                        projetos próprios que representem minhas ideias
+                        e tudo que estou aprendendo.
+                    </p>
+                    <span class="status">Sempre evoluindo</span>
+                </div>
+
+            </div>
+
+        </section>
+
+        <section>
+
+            <div class="section-title reveal">
+                <h2>Um pouco dos meus estudos</h2>
+                <p>Além da tecnologia, também tenho um olhar para o mundo</p>
+            </div>
+
+            <div class="course-box reveal">
+                <h3>Comércio Exterior</h3>
+                <p>
+                    Atualmente faço curso técnico em Comércio Exterior.
+                    Tenho a oportunidade de estudar assuntos relacionados
+                    ao comércio internacional, importação, exportação e
+                    às relações econômicas entre diferentes países.
+                    <br><br>
+                    É uma área que combina muito bem com minha curiosidade
+                    sobre geopolítica e meu interesse em compreender
+                    como o mundo funciona.
+                </p>
+            </div>
+
+        </section>
+
+    </main>
+
+    <footer>
+        <h3>Feito com carinho por Nicole</h3>
+        <div class="footer-line"></div>
+        <p>
+            Um pequeno espaço, muitos interesses e infinitas possibilidades.
+            <br>
+            Obrigada por visitar meu cantinho!
+        </p>
+        <p style="margin-top: 20px; font-size: 11px;">
+            © 2026 Nicole | Todos os direitos reservados.
+        </p>
+    </footer>
+
+    <script>
+        // Animação dos elementos ao aparecerem na tela
+
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('active');
+                    observer.unobserve(entry.target);
+                }
+            });
+        }, {
+            threshold: 0.15
+        });
+
+        document.querySelectorAll('.reveal').forEach(element => {
+            observer.observe(element);
+        });
+
+        // Pequeno efeito de movimento nos cartões
+
+        document.querySelectorAll('.interest-card').forEach(card => {
+            card.addEventListener('mousemove', (event) => {
+                const rect = card.getBoundingClientRect();
+
+                const x = event.clientX - rect.left;
+                const y = event.clientY - rect.top;
+
+                const centerX = rect.width / 2;
+                const centerY = rect.height / 2;
+
+                const rotateX = (y - centerY) / 25;
+                const rotateY = (centerX - x) / 25;
+
+                card.style.transform =
+                    `translateY(-8px) perspective(600px) rotateX(${rotateX}deg) rotateY(${rotateY}deg)`;
+            });
+
+            card.addEventListener('mouseleave', () => {
+                card.style.transform = '';
+            });
+        });
+    </script>
+
+</body>
+</html>
+```
